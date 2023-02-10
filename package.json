@@ -1,0 +1,11 @@
+{
+  "name": "chat-robot-mini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tdesign-miniprogram": "^1.0.0-rc.1"
+  }
+}
