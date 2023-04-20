@@ -3,14 +3,20 @@
 
   <scroll-view class="scroll-view" scroll-y="true" scroll-into-view="{{scrollLast}}">
     <view class="item" wx:for="{{list}}" wx:key="index" id="item{{index + 1}}">
-      <view class="baseInfo-avatar">
-        <image wx:if="{{item.role === 'ai'}}" class="logo" src="https://img.alicdn.com/imgextra/i1/O1CN0134jd0T1dTauS9T3fd_!!6000000003737-2-tps-336-336.png" mode="" />
-        <open-data wx:else type="userAvatarUrl"></open-data>
+      <view class="baseInfo-avatar" wx:if="{{item.role === 'ai'}}">
+        <image class="logo" src="https://img.alicdn.com/imgextra/i1/O1CN0134jd0T1dTauS9T3fd_!!6000000003737-2-tps-336-336.png" mode="" />
       </view>
-      <view class="text">
+      <view class="baseInfo-avatar" wx:else>
+      </view>
+      <view class="{{item.role === 'ai'? 'text-box': 'text-box-rtl'}}">
         <view class="cont">
           {{item.text}}
         </view>
+      </view>
+      <view class="baseInfo-avatar" wx:if="{{item.role !== 'ai'}}">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="baseInfo-avatar" wx:else>
       </view>
     </view>
   </scroll-view>

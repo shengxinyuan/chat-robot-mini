@@ -1,0 +1,112 @@
+/* pages/post/post.wxss */
+.page {
+  background-color: rgb(240, 240, 240);
+}
+.detail {
+  background-color: rgb(250, 250, 250);
+  height: 100%;
+  padding: 32rpx;
+}
+.nikeName {
+  display: flex;
+  font-size: 32rpx;
+  color: #414141;
+  margin-bottom: 32rpx;
+}
+.avatar-box {
+  display: inline-block;
+  overflow: hidden;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+.avatar {
+  width: 40rpx;
+  height: 40rpx;
+}
+.info {
+}
+
+.comment {
+  background-color: rgb(250, 250, 250);
+  height: 100%;
+  margin-top: 24rpx;
+  padding: 32rpx 32rpx 200rpx;
+}
+.comment-title {
+  margin-bottom: 20rpx;
+}
+.comment-title-text {
+  font-size: 36rpx;
+  padding-bottom: 10rpx;
+  color: #414141;
+  border-bottom: 3rpx solid #414141;
+}
+.comment-item {
+  display: flex;
+  padding: 24rpx 0;
+}
+.comment-avatar-box {
+  display: inline-block;
+  overflow: hidden;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 32rpx;
+}
+.comment-avatar {
+  width: 60rpx;
+  height: 60rpx;
+}
+.comment-content {
+  flex: 1;
+}
+.comment-content-nikeName {
+  color: #666;
+  margin-bottom: 10rpx;
+}
+.comment-like {
+  display: flex;
+}
+.comment-content-cont {
+  color: #2c2c2c;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+.comment-content-time {
+  font-size: 20rpx;
+  color: #999;
+}
+.comment-content-reply {
+  font-size: 20rpx;
+  color: #666;
+  margin-left: 32rpx;
+}
+.red {
+  color: rgb(250, 96, 96);
+  font-size: 10rpx;
+}
+
+.bottom-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 160rpx;
+  width: 100%;
+  background-color: #fff;
+  padding-bottom: 50rpx;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32rpx;
+}
+
+.like-btn-cont {
+  display: flex;
+  align-items: center;
+  margin: 0 48rpx;
+}

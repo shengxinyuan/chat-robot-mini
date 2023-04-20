@@ -18,4 +18,27 @@
     />
     <t-button theme="primary" size="large" block bindtap="bindViewBtn">提问</t-button>
   </view>
+
+  <view class="list" wx:if="{{recommend.length > 0}}">
+    <!-- <view class="list-title"><text class="list-title-text">精彩推荐</text></view> -->
+    <t-tabs t-class="custom-tabs" defaultValue="{{tab}}" bind:click="onTabsClick">
+      <block wx:for="{{recommend}}" wx:key="id">
+        <t-tab-panel label="{{item.name}}" value="{{item.id}}" />
+      </block>
+    </t-tabs>
+    <block wx:for="{{list}}" wx:key="postId">
+      <view class="item" id="{{item.postId}}" bindtap="goPostDetail">
+        <view class="info">
+          <view class="title">{{item.post.title}}</view>
+          <view class="nikeName">
+            <view class="item-avatar-box">
+              <image class="item-avatar" src="{{item.post.user.avatar}}"/>
+            </view>
+            {{item.post.user.nikeName}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
 </view>

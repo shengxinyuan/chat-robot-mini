@@ -1,3 +1,4 @@
+import wxCloudApi from '../../service/api'
 // pages/answer.js
 Page({
 
@@ -8,14 +9,16 @@ Page({
     inputText: '',
     list: [],
     canUseBtn: true,
-    scrollLast: null
+    scrollLast: null,
+    conversationId: '',
+    parentMessageId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    wx.cloud.init();
+    
     const { question = '' } = options || {};
     this.setData({
       inputText: question
@@ -68,23 +71,44 @@ Page({
     })
   },
 
+  catchGPTError() {
+    const list = this.data.list;
+    list.push({
+      role: 'ai',
+      text: '对不起，请稍等，我要回答的问题太多，让我思考一会！'
+    })
+    this.setData({
+      list: list,
+    }, () => {
+      this.scrolTolLast()
+    });
+    wx.showToast({
+      title: '服务繁忙请稍等',
+      icon: 'error',
+      duration: 2000
+    })
+  },
+
   async queryAi(text) {
     wx.showLoading({
       title: 'AI思考中..',
     })
-    const { data } = await wx.cloud.callContainer({
-      "config": {
-        "env": "prod-3g0c541z90544ce3"
-      },
-      "path": "/api/queryChatGPT",
-      "header": {
-        "X-WX-SERVICE": "koa-6c9z"
-      },
-      "method": "POST",
-      "data": {
-        "question": text
-      }
-    });
+    let data;
+    try {
+      const res = await wxCloudApi({
+        url: '/api/queryChatGPT',
+        method: 'POST',
+        data: {
+          question: text,
+          conversationId: this.data.conversationId,
+          parentMessageId: this.data.parentMessageId
+        }
+      }) 
+      data = res.data;
+    } catch (error) {
+      this.catchGPTError()
+    }
+    
     this.setData({
       canUseBtn: true
     })
@@ -93,29 +117,17 @@ Page({
       const list = this.data.list;
       list.push({
         role: 'ai',
-        text: data.data
+        text: data.data.response
       })
       this.setData({
         list: list,
+        conversationId: data.data.conversationId,
+        parentMessageId: data.data.messageId
       }, () => {
         this.scrolTolLast()
       });
     } else {
-      const list = this.data.list;
-      list.push({
-        role: 'ai',
-        text: '对不起，请稍等，我要回答的问题太多，让我思考一会！'
-      })
-      this.setData({
-        list: list,
-      }, () => {
-        this.scrolTolLast()
-      });
-      wx.showToast({
-        title: '服务繁忙请稍等',
-        icon: 'error',
-        duration: 2000
-      })
+      this.catchGPTError()
     }
   }
 

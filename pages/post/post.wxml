@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="detail">
+    <view class="nikeName">
+      <view class="avatar-box">
+        <image class="avatar" src="{{detail.user.avatar}}"/>
+      </view>
+      {{detail.user.nikeName}}
+    </view>
+    <view class="info">
+      <text class="title">{{detail.title}}</text>
+    </view>
+    <view class="content">
+      <rich-text nodes="{{detail.content}}"></rich-text>
+    </view>
+    <view class="like">
+      <t-button shape="round">
+        <view class="like-btn-cont">
+          <text>{{detail.likeCount || 0}}</text>
+          <t-icon name="heart" size="48rpx" />
+        </view>
+      </t-button>
+    </view>
+  </view>
+
+  <view class="comment">
+    <view class="comment-title"><text class="comment-title-text">评论</text></view>
+    <block wx:for="{{detail.comments}}" wx:key="id">
+      <view class="comment-item">
+        <view class="comment-avatar-box">
+          <image class="comment-avatar" src="{{item.user.avatar}}"/>
+        </view>
+        <view class="comment-content">
+          <view class="comment-content-nikeName">{{item.user.nikeName}}</view>
+          <view class="comment-content-cont">{{item.content}}</view>
+          <view class="comment-content-time">
+            {{item.gmtCreate}}
+            <text class="comment-content-reply">回复</text>
+          </view>
+        </view>
+        <view class="comment-like">
+          <text class="comment-content-reply">{{item.likeCount || 0}}</text>
+          <t-icon class="red" name="heart" size="36rpx" data-name="{{item}}" bind:click="onIconTap" />
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+  <view class="bottom-box">
+    <t-input bindchange="inputHandler" value="{{inputText}}" placeholder="请在此处输入回复">
+      <t-button slot="suffix" theme="primary" size="extra-small" bindtap="bindBtn"> 回复 </t-button>
+    </t-input>
+  </view>
+
+</view>
