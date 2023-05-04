@@ -90,13 +90,22 @@ Page({
   },
 
   async queryAi(text) {
-    wx.showLoading({
-      title: 'AI思考中..',
-    })
     let data;
+    const list = this.data.list;
+    list.push({
+      role: 'ai',
+      text: 'ai在思考中...'
+    })
+
+    this.setData({
+      list: list,
+    }, () => {
+      this.scrolTolLast()
+    });
+
     try {
       const res = await wxCloudApi({
-        url: '/api/queryChatGPT',
+        url: '/api/chat/answer',
         method: 'POST',
         data: {
           question: text,
@@ -104,20 +113,19 @@ Page({
           parentMessageId: this.data.parentMessageId
         }
       }) 
-      data = res.data;
+      data = res;
     } catch (error) {
       this.catchGPTError()
     }
-    
+
     this.setData({
       canUseBtn: true
     })
-    wx.hideLoading()
     if (data.code === 0) {
       const list = this.data.list;
       list.push({
         role: 'ai',
-        text: data.data.response
+        text: data.data.text
       })
       this.setData({
         list: list,

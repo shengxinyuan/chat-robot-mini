@@ -1,4 +1,3 @@
-import login from '../../service/login'
 import wxCloudApi from '../../service/api'
 
 Page({
@@ -22,13 +21,15 @@ Page({
   },
   // 事件处理函数
   bindViewBtn() {
+    if (!this.data.inputText) {
+      return
+    }
     wx.navigateTo({
       url: `/pages/answer/answer?question=${this.data.inputText}`
     })
   },
   onLoad() {
     // this.getUserProfile()
-    login()
     this.queryRecommend();
   },
   

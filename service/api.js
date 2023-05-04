@@ -58,7 +58,8 @@ const wxCloudApi = async({ url = '', method = 'GET', data = {}, header = {} }) =
       ...header,
     },
     "method": method,
-    "data": data
+    "data": data,
+    "timeout": 60000
   });
 
   if (statusCode === 200) {

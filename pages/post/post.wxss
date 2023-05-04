@@ -25,7 +25,8 @@
   width: 40rpx;
   height: 40rpx;
 }
-.info {
+.content {
+  color: #414141;
 }
 
 .comment {
